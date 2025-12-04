@@ -30,3 +30,24 @@ pnpm-debug.log*
 # System files
 .DS_Store
 *.pem
+# Dependencies
+node_modules/
+
+# Next.js build
+.next/
+out/
+
+# Vercel
+.vercel/
+
+# Local machine junk
+.local/
+.vscode/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# System
+.DS_Store
