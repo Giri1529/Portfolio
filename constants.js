@@ -95,29 +95,88 @@ export const PROJECTS = [
     name: "Job Role Prediction System",
     imageKey: "job-prediction",
     description: "ML model predicting job roles from education with 85%+ accuracy 🎯",
+    fullDescription: "An intelligent machine learning system that predicts job roles based on educational background and skills. The system uses optimized ML pipelines with feature selection, hyperparameter tuning, and model comparison to deliver accurate predictions.",
     gradient: ["#667eea", "#764ba2"],
-    tech: ["python", "sklearn", "pandas"],
+    url: "",
+    repo: "",
+    features: [
+      "Predicts multiple job categories (Software Engineer, Data Analyst, ML Engineer, Web Developer, etc.)",
+      "Optimized ML pipeline with feature selection and hyperparameter tuning",
+      "Interactive UI with predictions, skill-industry trends, and personalized suggestions",
+      "Visual insights showing education-to-job mapping and domain suitability"
+    ],
+    achievements: [
+      "Achieved 85-87% prediction accuracy on test data",
+      "Reduced model error significantly using feature engineering",
+      "Delivered fast inference system (<200ms prediction time)"
+    ],
+    tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "Streamlit", "Jupyter Notebook"]
   },
   {
     name: "Data Analytics & Predictive Modeling",
     imageKey: "data-analytics",
     description: "End-to-end data pipeline with Power BI dashboards 📊",
+    fullDescription: "Comprehensive data analytics solution featuring predictive modeling and interactive dashboards. Provides insights on revenue trends, customer segmentation, and performance metrics with ML-powered predictions.",
     gradient: ["#f093fb", "#f5576c"],
-    tech: ["python", "powerbi", "mysql"],
+    url: "",
+    repo: "",
+    features: [
+      "Revenue trends, customer segmentation, and churn indicators",
+      "Outlier patterns, correlations, and KPI summaries",
+      "Category-wise comparisons showing growth vs. decline drivers",
+      "Classification models for churn prediction and anomaly detection",
+      "Regression models for sales forecasting and revenue prediction"
+    ],
+    achievements: [
+      "Identified high-impact variables driving decision-making",
+      "Reduced manual analysis time with automated dashboards",
+      "Helped stakeholders understand future trends through predictive modeling"
+    ],
+    tech: ["Python", "SQL", "MySQL", "Pandas", "NumPy", "Scikit-learn", "Power BI", "Matplotlib", "Seaborn", "Jupyter Notebook"]
   },
   {
     name: "DocuQuery AI",
     imageKey: "docuquery",
     description: "AI-powered document chatbot with semantic search 🤖",
+    fullDescription: "An intelligent document question-answering system that uses natural language processing and semantic search to extract information from PDF documents. Supports multi-document search with context-aware retrieval.",
     gradient: ["#4facfe", "#00f2fe"],
-    tech: ["python", "tensorflow", "fastapi"],
+    url: "",
+    repo: "",
+    features: [
+      "Natural language question answering from uploaded documents",
+      "Semantic search using vector embeddings and transformer models",
+      "Multi-document search with context-aware retrieval",
+      "Supports PDF documents (multi-page, scanned, or digital)",
+      "Fast querying (<1 second per response)"
+    ],
+    achievements: [
+      "Built fallback response system for out-of-scope queries",
+      "Optimized for academic, corporate, legal, and personal use cases",
+      "Implemented efficient vector indexing for multiple documents"
+    ],
+    tech: ["Python", "Hugging Face Transformers", "Sentence Transformers", "FAISS", "PyPDF2", "FastAPI", "Streamlit"]
   },
   {
     name: "Finance Tracker",
     imageKey: "finance-tracker",
     description: "Personal finance app with interactive data visualizations 💰",
+    fullDescription: "A comprehensive personal finance management application with real-time analytics and interactive visualizations. Track income, expenses, and budgets with smart categorization and spending insights.",
     gradient: ["#43e97b", "#38f9d7"],
-    tech: ["python", "matplotlib", "pandas"],
+    url: "",
+    repo: "",
+    features: [
+      "Add, edit, categorize, and track income, expenses, and bills",
+      "Automatic monthly summaries and category-wise breakdowns",
+      "Budget setting and overspending alerts",
+      "Real-time analytics with instant chart updates",
+      "Smart categorization for spending patterns and savings tips"
+    ],
+    achievements: [
+      "Completely real-time analytics with instant updates",
+      "Simple, clean UI optimized for daily tracking",
+      "Lightweight but powerful financial planning tool"
+    ],
+    tech: ["Python", "HTML", "CSS", "JavaScript", "Flask", "SQLite", "Chart.js", "Plotly", "Bootstrap"]
   },
 ];
 

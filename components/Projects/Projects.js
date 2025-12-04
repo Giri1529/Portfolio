@@ -1,12 +1,25 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MENULINKS, PROJECTS } from "../../constants";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import ProjectTile from "./ProjectTile/ProjectTile";
+import ProjectModal from "./ProjectModal";
 
 const Projects = ({ isDesktop, clientHeight }) => {
   const sectionRef = useRef(null);
   const sectionTitleRef = useRef(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProject(null), 200);
+  };
 
   useEffect(() => {
     let projectsScrollTrigger;
@@ -83,9 +96,8 @@ const Projects = ({ isDesktop, clientHeight }) => {
     <section
       ref={sectionRef}
       id={MENULINKS[2].ref}
-      className={`${
-        isDesktop && "min-h-screen"
-      } w-full relative select-none section-container transform-gpu`}
+      className={`${isDesktop && "min-h-screen"
+        } w-full relative select-none section-container transform-gpu`}
     >
       <div className="flex flex-col py- justify-center h-full">
         <div
@@ -104,9 +116,8 @@ const Projects = ({ isDesktop, clientHeight }) => {
           </h2>
         </div>
         <div
-          className={`${
-            clientHeight > 650 ? "mt-12" : "mt-8"
-          } flex project-wrapper no-scrollbar w-fit staggered-reveal`}
+          className={`${clientHeight > 650 ? "mt-12" : "mt-8"
+            } flex project-wrapper no-scrollbar w-fit staggered-reveal`}
         >
           {PROJECTS.map((project, index) => (
             <ProjectTile
@@ -115,10 +126,18 @@ const Projects = ({ isDesktop, clientHeight }) => {
               }
               project={project}
               key={project.name}
+              onClick={() => handleProjectClick(project)}
             />
           ))}
         </div>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 };
