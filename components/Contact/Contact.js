@@ -4,7 +4,6 @@ import toast, { Toaster } from "react-hot-toast";
 import Fade from "react-reveal/Fade";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import mail from "./mailer";
 import styles from "./Contact.module.scss";
 import { MENULINKS } from "../../constants";
 
@@ -31,7 +30,7 @@ const error = () =>
   });
 
 const success = () =>
-  toast.success("Message sent successfully", {
+  toast.success("Opening WhatsApp...", {
     id: "success",
   });
 
@@ -77,19 +76,25 @@ const Contact = () => {
     }
 
     setIsSending(true);
-    mail({ name, email, message })
-      .then((res) => {
-        if (res.status === 200) {
-          setMailerResponse("success");
-          emptyForm();
-        } else {
-          setMailerResponse("error");
-        }
-      })
-      .catch((err) => {
-        setMailerResponse("error");
-        console.error(err);
-      });
+
+    // WhatsApp integration
+    const phoneNumber = "919391277268"; // Your WhatsApp number
+    const whatsappMessage = `Hi! I'm ${name}%0A%0AEmail: ${email}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+
+    // Show success message FIRST
+    setMailerResponse("success");
+
+    // Then open WhatsApp after a brief delay
+    setTimeout(() => {
+      window.open(whatsappURL, '_blank');
+    }, 300);
+
+    // Reset form after 2 seconds
+    setTimeout(() => {
+      emptyForm();
+      setIsSending(false);
+    }, 2000);
   };
 
   useEffect(() => {
@@ -325,12 +330,9 @@ const Contact = () => {
             </div>
           </Fade>
 
-          {mailerResponse !== "not initiated" &&
-            (mailerResponse === "success" ? (
-              <div className="hidden">{success()}</div>
-            ) : (
-              <div className="hidden">{error()}</div>
-            ))}
+          {mailerResponse === "success" && (
+            <div className="hidden">{success()}</div>
+          )}
         </form>
         <div className="mt-9 mx-auto link">
           <button
@@ -338,8 +340,8 @@ const Contact = () => {
             className={styles.button}
             disabled={
               formData.name === "" ||
-              formData.email === "" ||
-              formData.message === ""
+                formData.email === "" ||
+                formData.message === ""
                 ? true
                 : false
             }
