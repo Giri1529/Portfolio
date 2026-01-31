@@ -3,6 +3,7 @@ import Typed from "typed.js";
 import gsap from "gsap";
 import Button from "../Button/Button";
 import Profiles from "../Profiles/Profiles";
+import { InteractiveRobotSpline } from "../ui/interactive-3d-robot";
 import styles from "./Hero.module.scss";
 import { MENULINKS, TYPED_STRINGS } from "../../constants";
 
@@ -17,10 +18,15 @@ const options = {
 
 const Hero = () => {
   const [lottie, setLottie] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   const sectionRef = useRef(null);
   const typedElementRef = useRef(null);
   const lottieRef = useRef(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -43,23 +49,8 @@ const Hero = () => {
     return () => typed.destroy();
   }, [typedElementRef]);
 
-  useEffect(() => {
-    import("lottie-web").then((Lottie) => setLottie(Lottie.default));
-  }, []);
-
-  useEffect(() => {
-    if (lottie && lottieRef.current) {
-      const animation = lottie.loadAnimation({
-        container: lottieRef.current,
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        animationData: require("../../public/lottie/lottie.json"),
-      });
-
-      return () => animation.destroy();
-    }
-  }, [lottie]);
+  // Spline robot scene URL
+  const ROBOT_SCENE_URL = "https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode";
 
   return (
     <section
@@ -103,9 +94,16 @@ const Hero = () => {
         </div>
       </div>
       <div
-        className="absolute invisible w-4/12 bottom-1.5 lg:visible lg:right-12 2xl:right-16"
+        className="absolute invisible w-4/12 bottom-1.5 lg:visible lg:right-12 2xl:right-16 h-screen flex items-center justify-center"
         ref={lottieRef}
-      />
+      >
+        {isClient && (
+          <InteractiveRobotSpline
+            scene={ROBOT_SCENE_URL}
+            className="w-full h-full"
+          />
+        )}
+      </div>
     </section>
   );
 };
