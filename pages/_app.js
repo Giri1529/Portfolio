@@ -1,5 +1,6 @@
 import { calibre, jetbrains_mono } from "public/fonts";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Meta from "@/components/Meta/Meta";
 import "../styles/globals.scss";
 import { GTAG } from "constants";
@@ -13,6 +14,7 @@ const App = ({ Component, pageProps }) => {
       >
         <Component {...pageProps} />
         <GoogleAnalytics gaId={GTAG} />
+        <SpeedInsights />
       </main>
     </>
   );
