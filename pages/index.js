@@ -22,11 +22,15 @@ gsap.config({ nullTargetWarn: false });
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [fadeLoading, setFadeLoading] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
   const [clientHeight, setClientHeight] = useState(0);
   const [clientWidth, setClientWidth] = useState(0);
 
   useEffect(() => {
+    setTimeout(() => {
+      setFadeLoading(true);
+    }, 2000);
     setTimeout(() => {
       setIsLoading(false);
     }, 2600);
@@ -50,7 +54,7 @@ export default function Home() {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <Loader fade={fadeLoading} />
       ) : (
         <>
           <Header>

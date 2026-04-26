@@ -41,6 +41,9 @@ export const MENULINKS = [
   },
 ];
 
+export const findMenuRef = (ref) =>
+  MENULINKS.find((m) => m.ref === ref) || { ref };
+
 export const TYPED_STRINGS = [
   "I am a software developer",
   "I build intelligent solutions with data",
@@ -62,7 +65,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: "resume",
-    url: "https://drive.google.com/file/d/14kcq_XSKeuLNFuJMcEuvMJzWd5WpqxkP/view?usp=sharing",
+    url: "https://drive.google.com/file/d/1fdQi_BxJuFaTnUlRn1vqb6QxYxGkr2pt/view?usp=sharing",
   },
 ];
 
@@ -90,6 +93,31 @@ export const SKILLS = {
 };
 
 export const PROJECTS = [
+  {
+    name: "RAKSHANA 24/7",
+    subtitle: "1st Place — Alliance University Hackathon 2026",
+    imageKey: "rakshana-24-7",
+    description: "Full-stack digital threat intelligence platform with real-time monitoring 🛡️",
+    fullDescription: "Architected a digital threat intelligence platform: PWA frontend + Flask REST backend + Celery async task queues for continuous multi-source monitoring. AES-256 PII encryption, scraping pipelines (Telegram, paste sites), real-time Twilio alerts, and NLP-based contextual threat scoring. Designed for vernacular, mobile-first cyber-safety reporting.",
+    gradient: ["#1a1f4d", "#ffd200"],
+    url: "",
+    repo: "",
+    isFeatured: true,
+    features: [
+      "PWA frontend with offline-first reporting",
+      "Flask REST backend + Celery async task queues",
+      "Multi-source scraping (Telegram, paste sites)",
+      "Real-time Twilio SMS alerts",
+      "AES-256 PII encryption end-to-end",
+      "NLP-based contextual threat scoring",
+    ],
+    achievements: [
+      "1st Place — Alliance University Hackathon 2026",
+      "Vernacular, mobile-first cyber-safety design",
+      "Real-time multi-channel alerting",
+    ],
+    tech: ["Python", "Flask", "Celery", "Redis", "PWA", "JavaScript", "AES-256", "Twilio API", "NLP"],
+  },
   {
     name: "Job Role Prediction System",
     imageKey: "job-prediction",
@@ -154,28 +182,6 @@ export const PROJECTS = [
       "Implemented efficient vector indexing for multiple documents"
     ],
     tech: ["Python", "Hugging Face Transformers", "Sentence Transformers", "FAISS", "PyPDF2", "FastAPI", "Streamlit"]
-  },
-  {
-    name: "Finance Tracker",
-    imageKey: "finance-tracker",
-    description: "Personal finance app with interactive data visualizations 💰",
-    fullDescription: "A comprehensive personal finance management application with real-time analytics and interactive visualizations. Track income, expenses, and budgets with smart categorization and spending insights.",
-    gradient: ["#43e97b", "#38f9d7"],
-    url: "",
-    repo: "",
-    features: [
-      "Add, edit, categorize, and track income, expenses, and bills",
-      "Automatic monthly summaries and category-wise breakdowns",
-      "Budget setting and overspending alerts",
-      "Real-time analytics with instant chart updates",
-      "Smart categorization for spending patterns and savings tips"
-    ],
-    achievements: [
-      "Completely real-time analytics with instant updates",
-      "Simple, clean UI optimized for daily tracking",
-      "Lightweight but powerful financial planning tool"
-    ],
-    tech: ["Python", "HTML", "CSS", "JavaScript", "Flask", "SQLite", "Chart.js", "Plotly", "Bootstrap"]
   },
 ];
 

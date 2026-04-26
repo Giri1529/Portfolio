@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Tabs from "./Tabs/Tabs";
 import StickyScroll from "./StickyScroll/StickyScroll";
-import { MENULINKS, WORK_CONTENTS } from "../../constants";
+import { findMenuRef, WORK_CONTENTS } from "../../constants";
 
 const Work = ({ isDesktop }) => {
   const sectionRef = useRef(null);
@@ -69,7 +69,7 @@ const Work = ({ isDesktop }) => {
   return (
     <section
       ref={sectionRef}
-      id={MENULINKS[3].ref}
+      id={findMenuRef("work").ref}
       className="w-full relative select-none xs:mt-40 sm:mt-72 mb-96"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}

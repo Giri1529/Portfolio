@@ -15,7 +15,7 @@ const tiltOptions = {
 const ProjectTile = ({ project, classes, isDesktop, onClick }) => {
   const projectCard = useRef(null);
 
-  const { name, imageKey, description, gradient } = project;
+  const { name, imageKey, description, gradient, isFeatured, subtitle } = project;
 
   const image = PROJECT_IMAGES[imageKey];
 
@@ -31,20 +31,29 @@ const ProjectTile = ({ project, classes, isDesktop, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className={`overflow-hidden rounded-3xl snap-start cursor-pointer hover:scale-105 transition-transform duration-300 ${additionalClasses}`}
+      className={`overflow-visible rounded-3xl snap-start cursor-pointer hover:scale-105 transition-transform duration-300 ${
+        isFeatured ? styles.featuredFloat : ""
+      } ${additionalClasses}`}
       style={{
         maxWidth: isDesktop ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)",
         flex: "1 0 auto",
-        WebkitMaskImage: "-webkit-radial-gradient(white, black)",
       }}
     >
       <div
         ref={projectCard}
-        className={`${styles.projectTile} rounded-3xl relative overflow-hidden flex flex-col justify-end`}
+        className={`${styles.projectTile} ${
+          isFeatured ? styles.featured : ""
+        } rounded-3xl relative overflow-hidden flex flex-col justify-end`}
         style={{
           background: `linear-gradient(135deg, ${gradient[0]} 0%, ${gradient[1]} 100%)`,
         }}
       >
+        {isFeatured && (
+          <div className={styles.ribbon}>
+            <span>1st Place</span>
+          </div>
+        )}
+
         {/* Background Image */}
         <div className="absolute inset-0 flex items-center justify-center">
           <Image
@@ -52,7 +61,7 @@ const ProjectTile = ({ project, classes, isDesktop, onClick }) => {
             alt={name}
             placeholder="blur"
             fill
-            className="object-contain"
+            className="object-cover"
             style={{ objectPosition: 'center' }}
           />
         </div>
@@ -61,12 +70,20 @@ const ProjectTile = ({ project, classes, isDesktop, onClick }) => {
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(to bottom, transparent 0%, transparent 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.8) 100%)`,
+            background: `linear-gradient(to bottom, transparent 0%, transparent 40%, rgba(0,0,0,0.45) 65%, rgba(0,0,0,0.85) 100%)`,
           }}
         />
 
         {/* Content */}
         <div className="relative z-10 p-6 pb-8">
+          {isFeatured && subtitle && (
+            <p
+              className="text-[0.7rem] sm:text-xs uppercase tracking-[0.2em] font-semibold text-yellow-300 mb-2"
+              style={{ textShadow: '0 1px 6px rgba(0,0,0,0.7)' }}
+            >
+              {subtitle}
+            </p>
+          )}
           <h1
             className="font-bold text-2xl sm:text-3xl text-white mb-2 drop-shadow-lg"
             style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}

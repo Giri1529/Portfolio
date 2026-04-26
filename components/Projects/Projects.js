@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MENULINKS, PROJECTS } from "../../constants";
+import { findMenuRef, PROJECTS } from "../../constants";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import ProjectTile from "./ProjectTile/ProjectTile";
@@ -83,7 +83,7 @@ const Projects = ({ isDesktop, clientHeight }) => {
       trigger: sectionRef.current,
       start: "top top",
       end: duration,
-      scrub: 0,
+      scrub: 1,
       pin: true,
       animation: timeline,
       pinSpacing: "margin",
@@ -95,7 +95,7 @@ const Projects = ({ isDesktop, clientHeight }) => {
   return (
     <section
       ref={sectionRef}
-      id={MENULINKS[2].ref}
+      id={findMenuRef("projects").ref}
       className={`${isDesktop && "min-h-screen"
         } w-full relative select-none section-container transform-gpu`}
     >

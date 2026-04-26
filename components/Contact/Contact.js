@@ -5,7 +5,7 @@ import Fade from "react-reveal/Fade";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./Contact.module.scss";
-import { MENULINKS } from "../../constants";
+import { findMenuRef } from "../../constants";
 
 const filter = new Filter();
 filter.removeWords("hell", "god", "shit");
@@ -256,7 +256,7 @@ const Contact = () => {
   return (
     <section
       ref={sectionRef}
-      id={MENULINKS[4].ref}
+      id={findMenuRef("contact").ref}
       className="mt-30 w-full relative select-none bg-black pt-20 sm:pt-10 md:pt-5 lg:pt-1 pb-20"
     >
       <div>

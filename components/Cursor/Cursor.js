@@ -6,63 +6,71 @@ const Cursor = ({ isDesktop }) => {
   const follower = useRef(null);
 
   useEffect(() => {
-    if (isDesktop && document.body.clientWidth > 767) {
-      follower.current.classList.remove("hidden");
-      cursor.current.classList.remove("hidden");
+    if (!isDesktop || document.body.clientWidth <= 767) return;
 
-      const moveCircle = (e) => {
-        gsap.to(cursor.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.1,
-          ease: "none",
-        });
-        gsap.to(follower.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.3,
-          ease: "none",
-        });
-      };
+    follower.current.classList.remove("hidden");
+    cursor.current.classList.remove("hidden");
 
-      const hover = () => {
-        gsap.to(cursor.current, {
-          scale: 0.5,
-          duration: 0.3,
-        });
-        gsap.to(follower.current, {
-          scale: 3,
-          duration: 0.3,
-        });
-      };
+    const cursorX = gsap.quickTo(cursor.current, "x", {
+      duration: 0.18,
+      ease: "power3.out",
+    });
+    const cursorY = gsap.quickTo(cursor.current, "y", {
+      duration: 0.18,
+      ease: "power3.out",
+    });
+    const followerX = gsap.quickTo(follower.current, "x", {
+      duration: 0.45,
+      ease: "power3.out",
+    });
+    const followerY = gsap.quickTo(follower.current, "y", {
+      duration: 0.45,
+      ease: "power3.out",
+    });
 
-      const unHover = () => {
-        gsap.to(cursor.current, {
-          scale: 1,
-          duration: 0.3,
-        });
-        gsap.to(follower.current, {
-          scale: 1,
-          duration: 0.3,
-        });
-      };
+    let lastX = 0;
+    let lastY = 0;
+    let queued = false;
+    const flush = () => {
+      cursorX(lastX);
+      cursorY(lastY);
+      followerX(lastX);
+      followerY(lastY);
+      queued = false;
+    };
+    const moveCircle = (e) => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(flush);
+      }
+    };
 
-      document.addEventListener("mousemove", moveCircle);
+    const hover = () => {
+      gsap.to(cursor.current, { scale: 0.5, duration: 0.3, overwrite: "auto" });
+      gsap.to(follower.current, { scale: 3, duration: 0.3, overwrite: "auto" });
+    };
+    const unHover = () => {
+      gsap.to(cursor.current, { scale: 1, duration: 0.3, overwrite: "auto" });
+      gsap.to(follower.current, { scale: 1, duration: 0.3, overwrite: "auto" });
+    };
 
-      document.querySelectorAll(".link").forEach((el) => {
-        el.addEventListener("mouseenter", hover);
-        el.addEventListener("mouseleave", unHover);
+    document.addEventListener("mousemove", moveCircle, { passive: true });
+
+    const linkEls = Array.from(document.querySelectorAll(".link"));
+    linkEls.forEach((el) => {
+      el.addEventListener("mouseenter", hover);
+      el.addEventListener("mouseleave", unHover);
+    });
+
+    return () => {
+      document.removeEventListener("mousemove", moveCircle);
+      linkEls.forEach((el) => {
+        el.removeEventListener("mouseenter", hover);
+        el.removeEventListener("mouseleave", unHover);
       });
-
-      return () => {
-        document.removeEventListener("mousemove", moveCircle);
-
-        document.querySelectorAll(".link").forEach((el) => {
-          el.removeEventListener("mouseenter", hover);
-          el.removeEventListener("mouseleave", unHover);
-        });
-      };
-    }
+    };
   }, [cursor, follower, isDesktop]);
 
   return (

@@ -1,8 +1,8 @@
 import styles from "./Loader.module.scss";
 
-const Loader = () => {
+const Loader = ({ fade }) => {
   return (
-    <div className={styles.screen}>
+    <div className={`${styles.screen} ${fade ? styles.fadeOut : ""}`}>
       <div className={styles.container}>
         <div className={styles.loader}>
           <span>

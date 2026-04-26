@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 import FooterBg from "./FooterBg/FooterBg";
 import Profiles from "../Profiles/Profiles";
 import { theme } from "tailwind.config";
-import { MENULINKS } from "../../constants";
+import { findMenuRef } from "../../constants";
 
 const Footer = () => {
   const [playbackRate, setPlaybackRate] = useState(0.75);
@@ -41,7 +41,7 @@ const Footer = () => {
             </div>
             <div className="pt-4 text-center">
               <Button
-                href={`#${MENULINKS[4].ref}`}
+                href={`#${findMenuRef("contact").ref}`}
                 classes="link"
                 type="secondary"
               >

@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import Profiles from "../Profiles/Profiles";
 import { InteractiveRobotSpline } from "../ui/interactive-3d-robot";
 import styles from "./Hero.module.scss";
-import { MENULINKS, TYPED_STRINGS } from "../../constants";
+import { findMenuRef, TYPED_STRINGS } from "../../constants";
 
 const options = {
   strings: TYPED_STRINGS,
@@ -55,7 +55,7 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      id={MENULINKS[0].ref}
+      id={findMenuRef("home").ref}
       className="w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative mb-24"
       style={{ opacity: 0 }}
     >
@@ -88,7 +88,7 @@ const Hero = () => {
           <Profiles />
         </div>
         <div className="staggered-reveal pt-4">
-          <Button href={`#${MENULINKS[4].ref}`} classes="link" type="primary">
+          <Button href={`#${findMenuRef("contact").ref}`} classes="link" type="primary">
             Let&apos;s Talk
           </Button>
         </div>

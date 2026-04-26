@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { MENULINKS, SKILLS } from "../../constants";
+import { findMenuRef, SKILLS } from "../../constants";
 
 const Skills = () => {
   const sectionRef = useRef(null);
@@ -33,7 +33,7 @@ const Skills = () => {
   return (
     <section
       ref={sectionRef}
-      id={MENULINKS[1].ref}
+      id={findMenuRef("skills").ref}
       className="w-full relative select-none mt-44"
     >
       <div className="section-container py-16 flex flex-col justify-center">
